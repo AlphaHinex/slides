@@ -180,10 +180,84 @@
             ### Show Case
 
             1. 除法 TDD quick show
+            1. SEATA AT Demo
             1. 真实需求：通用导出功能
-            1. Web Service 测试用例
-            1. RESTful / RPC 测试用例
             1. 实操练习实例
+            1. Web Service 测试用例
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            ### 除法 TDD quick show
+            
+            https://start.spring.io/
+          </section>
+          <section data-markdown>
+            ### 除法 TDD quick show
+
+            1. 整除
+            1. 小数
+            1. 除不尽
+            1. 除数是 0
+          </section>
+          <section data-markdown>
+            ### 除法 TDD quick show
+
+            * http://spockframework.org
+            * http://www.groovy-lang.org/
+          </section>
+          <section data-markdown>
+            ### 除法 TDD quick show
+
+            * https://www.eclemma.org/jacoco/
+            * https://codecov.io/
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            ### SEATA AT Demo
+
+            假设当前有这样一个基础微服务环境：
+
+            * 基于 [Spring Cloud](https://spring.io/projects/spring-cloud) 构建，使用 [Nacos](https://nacos.io) 作为注册中心，利用 [OpenFeign](https://github.com/OpenFeign/feign) 进行服务间 RESTFul API 的调用。
+          </section>
+          <section data-markdown>
+            ### SEATA AT Demo
+
+            包含以下服务：
+
+            1. 库存服务（storage）
+            1. 用户账户服务（account）
+            1. 订单服务（order）
+            1. 业务服务（business）
+          </section>
+          <section data-markdown>
+            ### SEATA AT Demo
+
+            业务服务作为直接被调用的接口，组织关联其他三个服务。下订单时，服务的调用顺序如下：
+
+            ```
+            1. 减库存（storage）
+            2. 创建订单
+            2.1. 扣减用户账户（account）
+            2.2. 生成订单（order）
+            ```
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            ### 真实需求：通用导出功能
+            
+            1. 导出 excel 功能，怎么写单元测试？
+            1. 新增 POST 接口，需要重构原有代码
+            1. https://github.com/AlphaHinex/spring-roll/pull/22/files
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            ### 实操练习实例
+            
+            1. 怎么运行单元测试？
           </section>
         </section>
         <section style="text-align: left;">
