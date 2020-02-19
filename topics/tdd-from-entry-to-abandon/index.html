@@ -57,7 +57,7 @@
           </section>
         </section>
         <section data-background-transition="zoom">
-          <section data-background-image="./resources/agile.jpg">
+          <section data-background-image="./resources/agile.jpg" data-background-size="contain">
             <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
               <h3>主角登场</h3>
             </div>
@@ -126,10 +126,11 @@
 
             > 任何一个跟敏捷实施相关的问题，都是因为没有 TDD
           </section>
-          <section data-markdown>
-            ### 广告时间
+          <section>
+            <h3>广告时间</h3>
 
-            ![public](./resources/public.jpg)
+            <img data-src="./resources/blog.png">
+            <img data-src="./resources/public.jpg" style="width:300px;">
           </section>
         </section>
         <section>
@@ -257,7 +258,18 @@
           <section data-markdown>
             ### 实操练习实例
             
-            1. 怎么运行单元测试？
+            怎么运行单元测试？—— [!14](http://192.168.131.211:7777/practice/med_test/hsa-ips-svc/merge_requests/14/diffs)
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            ### Web Service 测试用例
+            
+            1. 作为服务端时，如何进行单元测试？
+            1. 作为客户端时，如何进行单元测试？
+            
+            * [node-soap](https://github.com/vpulim/node-soap)
+            * [ws-server-proxy](https://github.com/AlphaHinex/ws-server-proxy)
           </section>
         </section>
         <section style="text-align: left;">
@@ -269,7 +281,7 @@
       </div>
     </div>
 
-    <aside style="display:block;position:fixed;width:110px;height:110px;z-index:30;right:10px;bottom:10px;">
+    <aside style="display:block;position:fixed;width:110px;height:110px;z-index:30;left:10px;top:10px;">
         <img src="./resources/slide.png" alt="" width="110" height="110">
     </aside>
 
