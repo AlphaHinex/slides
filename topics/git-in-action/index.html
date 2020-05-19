@@ -139,10 +139,16 @@
             $ git stash list
             # 暂存
             $ git stash
-            # 应用最近一次暂存内容
+            # 暂存，并为暂存提供一些描述信息
+            $ git stash save some message
+            # 应用最近一次暂存内容（不会删除对应暂存）
             $ git stash apply
             # 应用某次暂存内容
             $ git stash apply 2
+            # 应用最近一次暂存内容，并删除对应暂存
+            $ git stash pop
+            # 应用某次暂存内容，并删除对应暂存
+            $ git stash pop 2
             # 清理所有暂存
             $ git stash clear
             ```
