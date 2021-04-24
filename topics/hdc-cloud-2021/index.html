@@ -1,179 +1,36 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <title>HDC.Cloud 2021</title>
-
-    <link rel="stylesheet" href="../../libs/reveal/css/reveal.css">
-    <link rel="stylesheet" href="../../libs/reveal/css/theme/simple.css">
-
-    <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="../../libs/reveal/lib/css/zenburn.css">
-
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? '../../libs/reveal/css/print/pdf.css' : '../../libs/reveal/css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
-  </head>
-  <body>
-    <div class="reveal">
-      <div class="slides">
-        <section data-transition="convex">
-          <section data-background-image="./resources/hdc-background.png" data-background-size="contain">
-            <h5><br></h5>
-            <h5><br></h5>
-            <h3 style="text-align: left;">东软 & 华为鲲鹏生态</h3>
-            <h3 style="text-align: left;">适配经验分享</h3>
-            <h5 style="text-align: left;"><br>东软政府事业本部医疗保障事业部</h5>
-            <h5 style="text-align: left;">软件架构师</h5>
-            <h5 style="text-align: left;">何鑫<a href="https://github.com/AlphaHinex">@AlphaHinex</a></h5>
-          </section>
-        </section>
-        <section data-transition="convex">
-          <section >
-            <h3>华为鲲鹏生态</h3>
-            <ul>
-              <li class="fragment">鲲鹏原指华为海思在 2019 年 1 月发布的一款兼容 ARM 指令集的服务器芯片 <a href="https://www.hisilicon.com/cn/products/Kunpeng/Huawei%20Kunpeng%20920">鲲鹏920</a><br><img data-src="./resources/hdc-kunpeng920.jpg"></li>
-              <li class="fragment">后来，鲲鹏不再仅仅局限于此，<strong>还包含了兼容的服务器软件，以及建立在新计算架构上的完整软硬件生态和云计算生态</strong></li>
-            </ul>
-          </section>
-          <section data-markdown>
-            ![cce](./resources/hdc-hciape.png)
-          </section>
-        </section>
-        <section data-transition="convex">
-          <section>
-            <h3>东软与华为鲲鹏生态适配进展介绍</h3>
-            <ul>
-              <li class="fragment">容器化应用适配</li>
-              <li class="fragment">华为云微服务体系适配</li>
-            </ul>
-          </section>
-        </section>
-        <section data-transition="convex">
-          <section>
-            <h3>容器化应用适配的关键问题</h3>
-            <ul>
-              <li class="fragment">调整镜像为 ARM 架构可用镜像</li>
-            </ul>
-          </section>
-          <section data-markdown>
-            ### 如何选择鲲鹏下可用的镜像
-
-            * 在华为鲲鹏服务器下，使用 Docker 时，因鲲鹏服务器使用的芯片为 ARM 架构，镜像也需要使用 ARM 版本的
-            * 从 x86 架构拉取的镜像直接导出导入到鲲鹏服务器上是不可以直接使用的
-          </section>
-          <section data-markdown>
-            ### 如何查看镜像的架构类型
-
-            * 可以通过 `docker inspect IMAGE_NAME` 查看镜像的架构类型
-
-            ```bash
-$ docker inspect redis:5.0.5-alpine|grep Architecture
-        "Architecture": "amd64",
-            ```
-          </section>
-          <section>
-            <p>在鲲鹏服务器上重新拉取镜像，会自动下载 ARM 架构的镜像，前提是需要有提供 ARM 架构的版本，如：</p>
-            <img data-src="./resources/hdc-redis-image.png">
-          </section>
-          <section data-markdown>
-            ### 不好用或者没有 ARM 架构镜像
-            ### 怎么办？
-          </section>
-          <section data-markdown>
-            ### 以 Redis 为例
-            * 在鲲鹏服务器上，使用官方提供的 ARM64 版本的 Redis 镜像，启动时会报如下异常：
-            ```bash
-            &lt;jemalloc>: Unsupported system page size
-            ```
-            * 从 Docker Hub 上试了一些有提供 ARM 版本的 Redis 镜像，基本都是相同的问题
-            * 推测是由于这些镜像的编译环境的 page size 与鲲鹏运行环境的 page size 不一致导致的
-          </section>
-          <section data-markdown>
-            ### 解决办法
-            * 在鲲鹏环境下，使用源码重新构建一个镜像
-            * 详细过程可见 [华为鲲鹏下可用的 Redis docker 镜像](https://alphahinex.github.io/2020/09/06/huawei-kunpeng-redis-docker-image/)
-            * [可用镜像传送门](https://gitee.com/AlphaHinex/trunk/blob/master/docker-library/redis/5.0/redis-kunpeng-5.0.9.tar.gz)
-          </section>
-        </section>
-        <section data-transition="convex">
-          <section data-background-image="./resources/hdc-cse-graph.png" data-background-size="contain">
-            <div style="background-color: rgba(0, 0, 0, 0.5); padding: 20px;">
-              <h3 style="color: #fff;">华为云微服务体系适配</h3>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Keynote</title>
+        <meta name="viewport" content="initial-scale = 1.0, minimum-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="assets/player/styles.css">
+    </head>
+    <body id="body" bgcolor="black">
+        <div id="stageArea">
+            <div id="stage" class="stage">
             </div>
-          </section>
-          <section data-markdown>
-            ![cse](./resources/hdc-cse.png)
-            ![cse-feat](./resources/hdc-cse-feat.png)
-          </section>
-          <section data-markdown>
-            ### 遇到的问题
-            * 2020 年上半年进行与 CSE 的适配时，发现当时 CSE 的版本与适配应用所使用的 Spring Cloud 版本不兼容，导致应用发布存在异常
-          </section>
-          <section data-markdown>
-            ### 解决方案
-            * 为验证与华为云应用中间件的适配情况，仅更换应用的发布方式
-            * 以 CCE 容器化方式进行应用系统的发布
-            ![cce](./resources/hdc-cce.png)
-          </section>
-          <section data-markdown>
-            ### Dubbo 使用 Mesher 接入 CSE
-            ![mesher](./resources/hdc-mesher.png)
-          </section>
-          <section data-markdown>
-            ### 对于 Mesher 的理解
-            * [Mesher简介](https://support.huaweicloud.com/devg-servicestage/ss-devg-0013.html)
-            * Mesher 是 Service Mesh 的一个具体的实现，是一个轻量的代理服务以 Sidecar 的方式与微服务一起运行
-            * 原生的 Dubbo 应用，无法直接与 CSE 的注册中心及配置中心进行交互，需要借助 Mesher，实现对应用的非侵入式、服务网格接入 CSE
-          </section>
-        </section>
-        <section data-transition="convex">
-          <section data-markdown>
-            ## 项目案例
-          </section>
-        </section>
-        <section data-transition="convex" data-background-image="./resources/hdc-end.png" data-background-size="contain"></section>
-      </div>
-    </div>
-
-    <aside style="display:block;position:fixed;width:110px;height:110px;z-index:30;left:10px;top:10px;">
-        <img src="./resources/slide.png" alt="" width="110" height="110">
-    </aside>
-
-    <script src="../../libs/reveal/lib/js/head.min.js"></script>
-    <script src="../../libs/reveal/js/reveal.js"></script>
-
-    <script>
-      // More info https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        history: true,
-
-        multiplex: {
-          // Example values. To generate your own, see the socket.io server instructions.
-          secret: null, // null so the clients do not have control of the master presentation
-          // secret: 'xxxx', // Obtained from the socket.io server. Gives this (the master) control of the presentation
-          id: '28c647ded18d7416', // id, obtained from socket.io server
-          url: 'https://reveal-js-multiplex-ccjbegmaii.now.sh' // Location of socket.io server
-        },
-
-        // More info https://github.com/hakimel/reveal.js#dependencies
-        dependencies: [
-          { src: '../../libs/reveal/plugin/markdown/marked.js' },
-          { src: '../../libs/reveal/plugin/markdown/markdown.js' },
-          { src: '../../libs/reveal/plugin/notes/notes.js', async: true },
-          { src: '../../libs/reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-          { src: '//cdn.socket.io/socket.io-1.3.5.js', async: true },
-          { src: '../../libs/reveal/plugin/multiplex/client.js', async: true }
-          // { src: '../../libs/reveal/plugin/multiplex/master.js', async: true }
-        ]
-      });
-    </script>
-  </body>
+            <div id="hyperlinkPlane" class="stage">
+            </div>
+        </div>
+        <div id="slideshowNavigator">
+        </div>
+        <div id="slideNumberControl">
+        </div>
+        <div id="slideNumberDisplay">
+        </div>
+        <div id="helpPlacard">
+        </div>
+        <div id="waitingIndicator">
+            <div id="waitingSpinner">
+            </div>
+        </div>
+        <aside style="display:block;position:fixed;width:110px;height:110px;z-index:30;left:10px;top:10px;">
+            <img src="assets/slide.png" alt="" width="110" height="110">
+        </aside>
+        <script type="text/javascript" src="assets/player/pdfjs/bcmaps.js"></script></body>
+        <script type="text/javascript" src="assets/player/pdfjs/web/compatibility.js"></script></body>
+        <script type="text/javascript" src="assets/player/pdfjs/pdf.js"></script></body>
+        <script type="text/javascript" src="assets/player/main.js"></script></body>
+    </body>
 </html>
